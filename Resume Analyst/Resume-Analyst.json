@@ -1,0 +1,457 @@
+{
+  "version": "1.0",
+  "exportedAt": "2025-12-04T11:39:09.601Z",
+  "state": {
+    "blocks": {
+      "3ef8ebc8-1990-436b-8988-5c2e2ace28d8": {
+        "id": "3ef8ebc8-1990-436b-8988-5c2e2ace28d8",
+        "type": "start_trigger",
+        "name": "Start",
+        "position": {
+          "x": -611.6365216358167,
+          "y": -281.7062256678359
+        },
+        "enabled": true,
+        "horizontalHandles": true,
+        "advancedMode": false,
+        "triggerMode": false,
+        "height": 100,
+        "subBlocks": {
+          "inputFormat": {
+            "id": "inputFormat",
+            "type": "input-format",
+            "value": [
+              {
+                "id": "0971a8c3-b02d-41de-854f-7c99e2973755",
+                "name": "",
+                "type": "string",
+                "value": "",
+                "collapsed": false
+              }
+            ]
+          }
+        },
+        "outputs": {
+          "files": {
+            "type": "files",
+            "description": "User uploaded files"
+          },
+          "input": {
+            "type": "string",
+            "description": "Primary user input or message"
+          },
+          "conversationId": {
+            "type": "string",
+            "description": "Conversation thread identifier"
+          }
+        },
+        "data": {},
+        "layout": {
+          "measuredWidth": 250,
+          "measuredHeight": 100
+        }
+      },
+      "f926f19b-5d0b-4a27-a7bb-916bb3c70c2b": {
+        "id": "f926f19b-5d0b-4a27-a7bb-916bb3c70c2b",
+        "type": "knowledge",
+        "name": "Search KB",
+        "position": {
+          "x": -206.19273896411323,
+          "y": -279.095712236223
+        },
+        "enabled": true,
+        "horizontalHandles": true,
+        "advancedMode": false,
+        "triggerMode": false,
+        "height": 201,
+        "subBlocks": {
+          "name": {
+            "id": "name",
+            "type": "short-input",
+            "value": null
+          },
+          "topK": {
+            "id": "topK",
+            "type": "short-input",
+            "value": "5"
+          },
+          "query": {
+            "id": "query",
+            "type": "short-input",
+            "value": "Resume of Aisha Patel, Generative AI Engineer"
+          },
+          "content": {
+            "id": "content",
+            "type": "long-input",
+            "value": null
+          },
+          "operation": {
+            "id": "operation",
+            "type": "dropdown",
+            "value": "search"
+          },
+          "documentId": {
+            "id": "documentId",
+            "type": "document-selector",
+            "value": ""
+          },
+          "tagFilters": {
+            "id": "tagFilters",
+            "type": "knowledge-tag-filters",
+            "value": ""
+          },
+          "documentTags": {
+            "id": "documentTags",
+            "type": "document-tag-entry",
+            "value": ""
+          },
+          "knowledgeBaseId": {
+            "id": "knowledgeBaseId",
+            "type": "knowledge-base-selector",
+            "value": ""
+          }
+        },
+        "outputs": {
+          "query": {
+            "type": "string",
+            "description": "Query used"
+          },
+          "results": {
+            "type": "json",
+            "description": "Search results"
+          },
+          "totalResults": {
+            "type": "number",
+            "description": "Total results count"
+          }
+        },
+        "data": {},
+        "layout": {
+          "measuredWidth": 250,
+          "measuredHeight": 201
+        }
+      },
+      "a08288cd-bc23-4cf9-a83f-891b406f1aa8": {
+        "id": "a08288cd-bc23-4cf9-a83f-891b406f1aa8",
+        "type": "note",
+        "name": "Resume Analyst",
+        "position": {
+          "x": -921.3786934799133,
+          "y": -279.2451797591127
+        },
+        "enabled": true,
+        "horizontalHandles": true,
+        "advancedMode": false,
+        "triggerMode": false,
+        "height": 114,
+        "subBlocks": {
+          "format": {
+            "id": "format",
+            "type": "dropdown",
+            "value": "markdown"
+          },
+          "content": {
+            "id": "content",
+            "type": "long-input",
+            "value": "*From resume to interview — precision-matched insights.*\n\n\nAn AI-powered career assistant that analyzes resumes against job descriptions, providing tailored feedback, ATS optimization tips, and actionable steps to boost job application success.\n\n**Sample JD URL:**\nhttps://gramener.com/careers/generative-ai-engineer/\n\n**Deployment Link:**\nhttps://www.sim.ai/chat/menloparkai-resume-analyst"
+          }
+        },
+        "outputs": {},
+        "data": {},
+        "layout": {
+          "measuredWidth": 250,
+          "measuredHeight": 114
+        }
+      },
+      "a083505d-2f55-4b56-92c1-55ea2fb5a9e2": {
+        "id": "a083505d-2f55-4b56-92c1-55ea2fb5a9e2",
+        "type": "agent",
+        "name": "Resume Analyst",
+        "position": {
+          "x": -121.96662560438597,
+          "y": -19.45714378785859
+        },
+        "enabled": true,
+        "horizontalHandles": true,
+        "advancedMode": false,
+        "triggerMode": false,
+        "height": 317,
+        "subBlocks": {
+          "model": {
+            "id": "model",
+            "type": "combobox",
+            "value": "gpt-5-mini"
+          },
+          "tools": {
+            "id": "tools",
+            "type": "tool-input",
+            "value": []
+          },
+          "apiKey": {
+            "id": "apiKey",
+            "type": "short-input",
+            "value": ""
+          },
+          "messages": {
+            "id": "messages",
+            "type": "messages-input",
+            "value": [
+              {
+                "role": "system",
+                "content": "**Role:** Career Analyst AI. Analyze resume against job description (JD) and provide actionable feedback.\n\n**Input:** User's resume + full job description.\n\n**Output Structure:**\n\n1. **Match Score & Quick Take**  \n   - Compatibility % & 2-line summary  \n   - Top 2 strengths & top 2 gaps\n\n2. **Skills & Keyword Analysis**  \n   - Matches (direct/transferable)  \n   - Missing critical skills  \n   - ATS keyword optimization tips\n\n3. **Tailoring Recommendations**  \n   - 2–3 specific resume edits (bullet points, summary, skills order)  \n   - 1–2 cover letter talking points\n\n4. **Action Plan**  \n   - Priority 1: Pre-application fixes  \n   - Priority 2: Short-term prep (interview Qs, research)\n\n**Format:** Use clear headings, bullet points, and bold for key terms. Keep it scannable.\n\n**Tone:** Direct, constructive, professional.\n\nNOTE: Do not include any follow-up questions, offers for further tailoring, or conversational text at the end."
+              },
+              {
+                "role": "user",
+                "content": "Job Description:\n<getjd.markdown>\n\nUser Resume:\n<searchkb.results>"
+              }
+            ]
+          },
+          "verbosity": {
+            "id": "verbosity",
+            "type": "dropdown",
+            "value": "medium"
+          },
+          "memoryType": {
+            "id": "memoryType",
+            "type": "dropdown",
+            "value": "conversation"
+          },
+          "temperature": {
+            "id": "temperature",
+            "type": "slider",
+            "value": 0.3
+          },
+          "azureEndpoint": {
+            "id": "azureEndpoint",
+            "type": "short-input",
+            "value": ""
+          },
+          "conversationId": {
+            "id": "conversationId",
+            "type": "short-input",
+            "value": "<start.conversationId>"
+          },
+          "responseFormat": {
+            "id": "responseFormat",
+            "type": "code",
+            "value": null
+          },
+          "azureApiVersion": {
+            "id": "azureApiVersion",
+            "type": "short-input",
+            "value": null
+          },
+          "reasoningEffort": {
+            "id": "reasoningEffort",
+            "type": "dropdown",
+            "value": "medium"
+          },
+          "slidingWindowSize": {
+            "id": "slidingWindowSize",
+            "type": "short-input",
+            "value": null
+          },
+          "slidingWindowTokens": {
+            "id": "slidingWindowTokens",
+            "type": "short-input",
+            "value": null
+          }
+        },
+        "outputs": {
+          "model": {
+            "type": "string",
+            "description": "Model used for generation"
+          },
+          "tokens": {
+            "type": "any",
+            "description": "Token usage statistics"
+          },
+          "content": {
+            "type": "string",
+            "description": "Generated response content"
+          },
+          "toolCalls": {
+            "type": "any",
+            "description": "Tool calls made"
+          }
+        },
+        "data": {},
+        "layout": {
+          "measuredWidth": 250,
+          "measuredHeight": 317
+        }
+      },
+      "4b0527f4-6334-4c64-a8c5-59cb662ae1fe": {
+        "id": "4b0527f4-6334-4c64-a8c5-59cb662ae1fe",
+        "type": "firecrawl",
+        "name": "Get JD",
+        "position": {
+          "x": -548.1059510223533,
+          "y": -60.678893834216666
+        },
+        "enabled": true,
+        "horizontalHandles": true,
+        "advancedMode": false,
+        "triggerMode": false,
+        "height": 317,
+        "subBlocks": {
+          "url": {
+            "id": "url",
+            "type": "short-input",
+            "value": "<start.input>"
+          },
+          "urls": {
+            "id": "urls",
+            "type": "long-input",
+            "value": null
+          },
+          "limit": {
+            "id": "limit",
+            "type": "short-input",
+            "value": null
+          },
+          "query": {
+            "id": "query",
+            "type": "short-input",
+            "value": null
+          },
+          "apiKey": {
+            "id": "apiKey",
+            "type": "short-input",
+            "value": "{{FIRECRAWL_API_KEY}}"
+          },
+          "mobile": {
+            "id": "mobile",
+            "type": "switch",
+            "value": true
+          },
+          "prompt": {
+            "id": "prompt",
+            "type": "long-input",
+            "value": null
+          },
+          "formats": {
+            "id": "formats",
+            "type": "long-input",
+            "value": null
+          },
+          "timeout": {
+            "id": "timeout",
+            "type": "short-input",
+            "value": 30000
+          },
+          "waitFor": {
+            "id": "waitFor",
+            "type": "short-input",
+            "value": "2000"
+          },
+          "operation": {
+            "id": "operation",
+            "type": "dropdown",
+            "value": "scrape"
+          },
+          "onlyMainContent": {
+            "id": "onlyMainContent",
+            "type": "switch",
+            "value": true
+          }
+        },
+        "outputs": {
+          "data": {
+            "type": "json",
+            "description": "Search results or extracted data"
+          },
+          "html": {
+            "type": "string",
+            "description": "Raw HTML content"
+          },
+          "links": {
+            "type": "json",
+            "description": "Discovered URLs array"
+          },
+          "pages": {
+            "type": "json",
+            "description": "Crawled pages data"
+          },
+          "total": {
+            "type": "number",
+            "description": "Total pages found"
+          },
+          "sources": {
+            "type": "json",
+            "description": "Data sources array"
+          },
+          "success": {
+            "type": "boolean",
+            "description": "Operation success status"
+          },
+          "warning": {
+            "type": "string",
+            "description": "Warning messages"
+          },
+          "markdown": {
+            "type": "string",
+            "description": "Page content markdown"
+          },
+          "metadata": {
+            "type": "json",
+            "description": "Page metadata"
+          },
+          "creditsUsed": {
+            "type": "number",
+            "description": "Credits consumed"
+          }
+        },
+        "data": {},
+        "layout": {
+          "measuredWidth": 250,
+          "measuredHeight": 317
+        }
+      }
+    },
+    "edges": [
+      {
+        "id": "7cd27ab2-bb6c-42d0-ae04-457503509511",
+        "source": "3ef8ebc8-1990-436b-8988-5c2e2ace28d8",
+        "target": "4b0527f4-6334-4c64-a8c5-59cb662ae1fe",
+        "sourceHandle": "source",
+        "targetHandle": "target",
+        "type": "default",
+        "data": {}
+      },
+      {
+        "id": "38fdc870-561f-4f51-b6d3-913828bc3fd4",
+        "source": "f926f19b-5d0b-4a27-a7bb-916bb3c70c2b",
+        "target": "a083505d-2f55-4b56-92c1-55ea2fb5a9e2",
+        "sourceHandle": "source",
+        "targetHandle": "target",
+        "type": "default",
+        "data": {}
+      },
+      {
+        "id": "4a4782a3-0acf-47b1-9581-3a0175e280f7",
+        "source": "4b0527f4-6334-4c64-a8c5-59cb662ae1fe",
+        "target": "f926f19b-5d0b-4a27-a7bb-916bb3c70c2b",
+        "sourceHandle": "source",
+        "targetHandle": "target",
+        "type": "default",
+        "data": {}
+      }
+    ],
+    "loops": {},
+    "parallels": {},
+    "metadata": {
+      "name": "Resume Analyst",
+      "description": "Intake a resume and determine if it matches job description",
+      "exportedAt": "2025-12-04T11:39:09.600Z"
+    },
+    "variables": [
+      {
+        "id": "c1a1c7b8-8eea-4047-be35-29b07c1d6913",
+        "name": "jobDescription",
+        "type": "plain",
+        "value": "Enter the job description here. This will be used to compare against candidate resumes."
+      }
+    ]
+  }
+}

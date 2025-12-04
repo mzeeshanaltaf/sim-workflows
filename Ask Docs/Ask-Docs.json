@@ -1,0 +1,335 @@
+{
+  "version": "1.0",
+  "exportedAt": "2025-12-04T11:39:18.441Z",
+  "state": {
+    "blocks": {
+      "275f7ecc-1a2e-4f04-a844-ea3fe675f9e5": {
+        "id": "275f7ecc-1a2e-4f04-a844-ea3fe675f9e5",
+        "type": "note",
+        "name": "Ask Docs",
+        "position": {
+          "x": -66.97338815648848,
+          "y": -401.9360281755156
+        },
+        "enabled": true,
+        "horizontalHandles": true,
+        "advancedMode": false,
+        "triggerMode": false,
+        "height": 114,
+        "subBlocks": {
+          "format": {
+            "id": "format",
+            "type": "dropdown",
+            "value": "markdown"
+          },
+          "content": {
+            "id": "content",
+            "type": "long-input",
+            "value": "*Ask any question related to PDF documents in knowledge base.*\n\n**Sample Questions:**\n* Summarize the document?\n* When the company was founded?\n* Who is the company CTO?\n* What is the company product line?\n\n**Deployment Link:**\nhttps://www.sim.ai/chat/menloparkai-ask-docs"
+          }
+        },
+        "outputs": {},
+        "data": {},
+        "layout": {
+          "measuredWidth": 250,
+          "measuredHeight": 114
+        }
+      },
+      "0cc5310c-52ae-44fa-b058-2dfc2cad96b3": {
+        "id": "0cc5310c-52ae-44fa-b058-2dfc2cad96b3",
+        "type": "knowledge",
+        "name": "Search KB",
+        "position": {
+          "x": 267.87887257904305,
+          "y": -259.49660014662345
+        },
+        "enabled": true,
+        "horizontalHandles": true,
+        "advancedMode": false,
+        "triggerMode": false,
+        "height": 201,
+        "subBlocks": {
+          "name": {
+            "id": "name",
+            "type": "short-input",
+            "value": null
+          },
+          "topK": {
+            "id": "topK",
+            "type": "short-input",
+            "value": "2"
+          },
+          "query": {
+            "id": "query",
+            "type": "short-input",
+            "value": "<start.input>"
+          },
+          "content": {
+            "id": "content",
+            "type": "long-input",
+            "value": null
+          },
+          "operation": {
+            "id": "operation",
+            "type": "short-input",
+            "value": "search"
+          },
+          "documentId": {
+            "id": "documentId",
+            "type": "document-selector",
+            "value": ""
+          },
+          "tagFilters": {
+            "id": "tagFilters",
+            "type": "knowledge-tag-filters",
+            "value": ""
+          },
+          "documentTags": {
+            "id": "documentTags",
+            "type": "document-tag-entry",
+            "value": ""
+          },
+          "knowledgeBaseId": {
+            "id": "knowledgeBaseId",
+            "type": "short-input",
+            "value": ""
+          }
+        },
+        "outputs": {
+          "query": {
+            "type": "string",
+            "description": "Query used"
+          },
+          "results": {
+            "type": "json",
+            "description": "Search results"
+          },
+          "totalResults": {
+            "type": "number",
+            "description": "Total results count"
+          }
+        },
+        "data": {},
+        "layout": {
+          "measuredWidth": 250,
+          "measuredHeight": 201
+        }
+      },
+      "74794c7c-b17e-45b5-bf1f-c41f4dcb7e86": {
+        "id": "74794c7c-b17e-45b5-bf1f-c41f4dcb7e86",
+        "type": "start_trigger",
+        "name": "Start",
+        "position": {
+          "x": 263.2816766555975,
+          "y": -410.36925973433557
+        },
+        "enabled": true,
+        "horizontalHandles": true,
+        "advancedMode": false,
+        "triggerMode": false,
+        "height": 100,
+        "subBlocks": {
+          "inputFormat": {
+            "id": "inputFormat",
+            "type": "input-format",
+            "value": [
+              {
+                "id": "6fb6a8c1-2632-452a-8010-2fcec5ae23e0",
+                "name": "input",
+                "type": "string",
+                "value": "",
+                "collapsed": false
+              },
+              {
+                "id": "a456d8e9-3097-4286-a3e0-df01189b0edb",
+                "name": "conversationId",
+                "type": "string",
+                "value": "",
+                "collapsed": false
+              },
+              {
+                "id": "94d31e92-5b87-4a42-b8af-2ca810938e44",
+                "name": "files",
+                "type": "files",
+                "value": "",
+                "collapsed": false
+              },
+              {
+                "id": "question-input",
+                "name": "question",
+                "type": "string",
+                "value": "",
+                "collapsed": false
+              }
+            ]
+          }
+        },
+        "outputs": {
+          "files": {
+            "type": "files",
+            "description": "User uploaded files"
+          },
+          "input": {
+            "type": "string",
+            "description": "Primary user input or message"
+          },
+          "conversationId": {
+            "type": "string",
+            "description": "Conversation thread identifier"
+          }
+        },
+        "data": {},
+        "layout": {
+          "measuredWidth": 250,
+          "measuredHeight": 100
+        }
+      },
+      "769950ea-9018-48e9-8ea1-f4b54758c9ad": {
+        "id": "769950ea-9018-48e9-8ea1-f4b54758c9ad",
+        "type": "agent",
+        "name": "PDF Assistant",
+        "position": {
+          "x": 601.347963797525,
+          "y": -412.8574259241363
+        },
+        "enabled": true,
+        "horizontalHandles": true,
+        "advancedMode": false,
+        "triggerMode": false,
+        "height": 317,
+        "subBlocks": {
+          "model": {
+            "id": "model",
+            "type": "combobox",
+            "value": "gpt-5-mini"
+          },
+          "tools": {
+            "id": "tools",
+            "type": "tool-input",
+            "value": []
+          },
+          "apiKey": {
+            "id": "apiKey",
+            "type": "short-input",
+            "value": "{{OPENAI_API_KEY}}"
+          },
+          "messages": {
+            "id": "messages",
+            "type": "messages-input",
+            "value": [
+              {
+                "role": "system",
+                "content": "You are a helpful assistant. Answer the user's question based on the following context from the knowledge base:\n\n<searchkb.results>\n\nProvide accurate answers based solely on the provided context."
+              },
+              {
+                "role": "user",
+                "content": "<start.input>"
+              }
+            ]
+          },
+          "verbosity": {
+            "id": "verbosity",
+            "type": "dropdown",
+            "value": "medium"
+          },
+          "memoryType": {
+            "id": "memoryType",
+            "type": "dropdown",
+            "value": "conversation"
+          },
+          "temperature": {
+            "id": "temperature",
+            "type": "slider",
+            "value": 0.3
+          },
+          "azureEndpoint": {
+            "id": "azureEndpoint",
+            "type": "short-input",
+            "value": ""
+          },
+          "conversationId": {
+            "id": "conversationId",
+            "type": "short-input",
+            "value": "<start.conversationId>"
+          },
+          "responseFormat": {
+            "id": "responseFormat",
+            "type": "code",
+            "value": null
+          },
+          "azureApiVersion": {
+            "id": "azureApiVersion",
+            "type": "short-input",
+            "value": null
+          },
+          "reasoningEffort": {
+            "id": "reasoningEffort",
+            "type": "dropdown",
+            "value": "medium"
+          },
+          "slidingWindowSize": {
+            "id": "slidingWindowSize",
+            "type": "short-input",
+            "value": null
+          },
+          "slidingWindowTokens": {
+            "id": "slidingWindowTokens",
+            "type": "short-input",
+            "value": null
+          }
+        },
+        "outputs": {
+          "model": {
+            "type": "string",
+            "description": "Model used for generation"
+          },
+          "tokens": {
+            "type": "any",
+            "description": "Token usage statistics"
+          },
+          "content": {
+            "type": "string",
+            "description": "Generated response content"
+          },
+          "toolCalls": {
+            "type": "any",
+            "description": "Tool calls made"
+          }
+        },
+        "data": {},
+        "layout": {
+          "measuredWidth": 250,
+          "measuredHeight": 317
+        }
+      }
+    },
+    "edges": [
+      {
+        "id": "90a8af5b-9b39-470d-80aa-8e5c8c29444b",
+        "source": "0cc5310c-52ae-44fa-b058-2dfc2cad96b3",
+        "target": "769950ea-9018-48e9-8ea1-f4b54758c9ad",
+        "sourceHandle": "source",
+        "targetHandle": "target",
+        "type": "default",
+        "data": {}
+      },
+      {
+        "id": "2d1a7b99-6647-42dc-a4e7-a4419a4fbbe5",
+        "source": "74794c7c-b17e-45b5-bf1f-c41f4dcb7e86",
+        "target": "0cc5310c-52ae-44fa-b058-2dfc2cad96b3",
+        "sourceHandle": "source",
+        "targetHandle": "target",
+        "type": "default",
+        "data": {}
+      }
+    ],
+    "loops": {},
+    "parallels": {},
+    "metadata": {
+      "name": "Ask Docs",
+      "description": "New workflow",
+      "exportedAt": "2025-12-04T11:39:18.441Z"
+    },
+    "variables": []
+  }
+}

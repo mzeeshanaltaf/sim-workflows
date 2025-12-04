@@ -1,0 +1,314 @@
+{
+  "version": "1.0",
+  "exportedAt": "2025-12-04T11:39:00.937Z",
+  "state": {
+    "blocks": {
+      "730d344a-702e-4a9a-a099-59f5ea118411": {
+        "id": "730d344a-702e-4a9a-a099-59f5ea118411",
+        "type": "start_trigger",
+        "name": "Start",
+        "position": {
+          "x": 583.1155111264176,
+          "y": -564.1005598552102
+        },
+        "enabled": true,
+        "horizontalHandles": true,
+        "advancedMode": false,
+        "triggerMode": false,
+        "height": 100,
+        "subBlocks": {
+          "inputFormat": {
+            "id": "inputFormat",
+            "type": "input-format",
+            "value": [
+              {
+                "id": "question-input",
+                "name": "question",
+                "type": "string",
+                "value": "",
+                "collapsed": false
+              }
+            ]
+          }
+        },
+        "outputs": {
+          "files": {
+            "type": "files",
+            "description": "User uploaded files"
+          },
+          "input": {
+            "type": "string",
+            "description": "Primary user input or message"
+          },
+          "conversationId": {
+            "type": "string",
+            "description": "Conversation thread identifier"
+          }
+        },
+        "data": {},
+        "layout": {
+          "measuredWidth": 250,
+          "measuredHeight": 100
+        }
+      },
+      "436d73fb-5d85-4a8d-a425-91bf0c8142fd": {
+        "id": "436d73fb-5d85-4a8d-a425-91bf0c8142fd",
+        "type": "note",
+        "name": "RecipeGen",
+        "position": {
+          "x": 269.95654316113945,
+          "y": -586.8117291379411
+        },
+        "enabled": true,
+        "horizontalHandles": true,
+        "advancedMode": false,
+        "triggerMode": false,
+        "height": 114,
+        "subBlocks": {
+          "format": {
+            "id": "format",
+            "type": "dropdown",
+            "value": "markdown"
+          },
+          "content": {
+            "id": "content",
+            "type": "long-input",
+            "value": "*Forge perfect recipes from any dish name.*\n\nYour smart recipe generator that decodes any dish name into foolproof cooking instructions\n\n**Sample Dish Names:**\n* Fried Chicken Curry\n* Swordfish Steak With Lemon And Capers\n* Massaman Gai\n* Chicken Burrito\n\n**Deployment Link:**\nhttps://www.sim.ai/chat/menloparkai-recipe-gen"
+          }
+        },
+        "outputs": {},
+        "data": {},
+        "layout": {
+          "measuredWidth": 250,
+          "measuredHeight": 114
+        }
+      },
+      "acc24477-c23d-43d5-b0aa-293a39067ba3": {
+        "id": "acc24477-c23d-43d5-b0aa-293a39067ba3",
+        "type": "knowledge",
+        "name": "Search KB",
+        "position": {
+          "x": 609.8006726551394,
+          "y": -387.27114184027783
+        },
+        "enabled": true,
+        "horizontalHandles": true,
+        "advancedMode": false,
+        "triggerMode": false,
+        "height": 201,
+        "subBlocks": {
+          "name": {
+            "id": "name",
+            "type": "short-input",
+            "value": null
+          },
+          "topK": {
+            "id": "topK",
+            "type": "short-input",
+            "value": "2"
+          },
+          "query": {
+            "id": "query",
+            "type": "short-input",
+            "value": "<start.input>"
+          },
+          "content": {
+            "id": "content",
+            "type": "long-input",
+            "value": null
+          },
+          "operation": {
+            "id": "operation",
+            "type": "short-input",
+            "value": "search"
+          },
+          "documentId": {
+            "id": "documentId",
+            "type": "document-selector",
+            "value": ""
+          },
+          "tagFilters": {
+            "id": "tagFilters",
+            "type": "knowledge-tag-filters",
+            "value": ""
+          },
+          "documentTags": {
+            "id": "documentTags",
+            "type": "document-tag-entry",
+            "value": ""
+          },
+          "knowledgeBaseId": {
+            "id": "knowledgeBaseId",
+            "type": "short-input",
+            "value": ""
+          }
+        },
+        "outputs": {
+          "query": {
+            "type": "string",
+            "description": "Query used"
+          },
+          "results": {
+            "type": "json",
+            "description": "Search results"
+          },
+          "totalResults": {
+            "type": "number",
+            "description": "Total results count"
+          }
+        },
+        "data": {},
+        "layout": {
+          "measuredWidth": 250,
+          "measuredHeight": 201
+        }
+      },
+      "422d6f41-4ce2-4e44-be6b-2e2d1824c601": {
+        "id": "422d6f41-4ce2-4e44-be6b-2e2d1824c601",
+        "type": "agent",
+        "name": "Recipe Generator",
+        "position": {
+          "x": 951.9840357697074,
+          "y": -520.503974506968
+        },
+        "enabled": true,
+        "horizontalHandles": true,
+        "advancedMode": false,
+        "triggerMode": false,
+        "height": 317,
+        "subBlocks": {
+          "model": {
+            "id": "model",
+            "type": "combobox",
+            "value": "gpt-5-mini"
+          },
+          "tools": {
+            "id": "tools",
+            "type": "tool-input",
+            "value": []
+          },
+          "apiKey": {
+            "id": "apiKey",
+            "type": "short-input",
+            "value": "{{OPENAI_API_KEY}}"
+          },
+          "messages": {
+            "id": "messages",
+            "type": "messages-input",
+            "value": [
+              {
+                "role": "system",
+                "content": "You are a helpful recipe assistant. Based on the user question below, generate a complete, well-structured recipe. Only use the information in the context. Do not make up any ingredients, steps, or tips that are not mentioned in the context.\n\nRecipe should have the following sections:\n1. Recipe Title\n2. Description\n3. Ingredients (in bullet points)\n4. Instructions (step-by-step numbered list)\n5. Optional Tips (if available in the context). If not available, do not include this section\n\nContext:\n<searchkb.results>\n\nProvide accurate answers based solely on the provided context. If the context seems fragmented, try to combine and organize it into a cohesive recipe. Response should be text based. Make headings as bold and use bullet points wherever necessary\n\nNote: Do not include any follow-up questions, offers for further tailoring, or conversational text at the end."
+              },
+              {
+                "role": "user",
+                "content": "<start.input>"
+              }
+            ]
+          },
+          "verbosity": {
+            "id": "verbosity",
+            "type": "dropdown",
+            "value": "medium"
+          },
+          "memoryType": {
+            "id": "memoryType",
+            "type": "dropdown",
+            "value": "conversation"
+          },
+          "temperature": {
+            "id": "temperature",
+            "type": "slider",
+            "value": 0.3
+          },
+          "azureEndpoint": {
+            "id": "azureEndpoint",
+            "type": "short-input",
+            "value": ""
+          },
+          "conversationId": {
+            "id": "conversationId",
+            "type": "short-input",
+            "value": "<start.conversationId>"
+          },
+          "responseFormat": {
+            "id": "responseFormat",
+            "type": "code",
+            "value": null
+          },
+          "azureApiVersion": {
+            "id": "azureApiVersion",
+            "type": "short-input",
+            "value": null
+          },
+          "reasoningEffort": {
+            "id": "reasoningEffort",
+            "type": "dropdown",
+            "value": "medium"
+          },
+          "slidingWindowSize": {
+            "id": "slidingWindowSize",
+            "type": "short-input",
+            "value": null
+          },
+          "slidingWindowTokens": {
+            "id": "slidingWindowTokens",
+            "type": "short-input",
+            "value": null
+          }
+        },
+        "outputs": {
+          "model": {
+            "type": "string",
+            "description": "Model used for generation"
+          },
+          "tokens": {
+            "type": "any",
+            "description": "Token usage statistics"
+          },
+          "content": {
+            "type": "string",
+            "description": "Generated response content"
+          },
+          "toolCalls": {
+            "type": "any",
+            "description": "Tool calls made"
+          }
+        },
+        "data": {},
+        "layout": {
+          "measuredWidth": 250,
+          "measuredHeight": 317
+        }
+      }
+    },
+    "edges": [
+      {
+        "id": "f534ca12-c9b4-4058-9398-99b02f72228a",
+        "source": "acc24477-c23d-43d5-b0aa-293a39067ba3",
+        "target": "422d6f41-4ce2-4e44-be6b-2e2d1824c601",
+        "sourceHandle": "source",
+        "targetHandle": "target",
+        "type": "default",
+        "data": {}
+      },
+      {
+        "id": "8fbfa19c-266a-47b2-91c2-8ab59ffec77f",
+        "source": "730d344a-702e-4a9a-a099-59f5ea118411",
+        "target": "acc24477-c23d-43d5-b0aa-293a39067ba3",
+        "sourceHandle": "source",
+        "targetHandle": "target",
+        "type": "default",
+        "data": {}
+      }
+    ],
+    "loops": {},
+    "parallels": {},
+    "metadata": {
+      "name": "Recipe Generator",
+      "description": "New workflow",
+      "exportedAt": "2025-12-04T11:39:00.937Z"
+    },
+    "variables": []
+  }
+}

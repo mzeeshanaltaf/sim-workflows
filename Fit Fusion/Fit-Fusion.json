@@ -1,0 +1,584 @@
+{
+  "version": "1.0",
+  "exportedAt": "2025-12-04T11:38:41.233Z",
+  "state": {
+    "blocks": {
+      "a069848f-b1ab-40e2-bf3e-5c3456672586": {
+        "id": "a069848f-b1ab-40e2-bf3e-5c3456672586",
+        "type": "google_forms",
+        "name": "Fitness Profile",
+        "position": {
+          "x": -1641.9033216559394,
+          "y": -1556.2185868178087
+        },
+        "enabled": true,
+        "horizontalHandles": true,
+        "advancedMode": false,
+        "triggerMode": true,
+        "height": 230,
+        "subBlocks": {
+          "token": {
+            "id": "token",
+            "type": "short-input",
+            "value": ""
+          },
+          "formId": {
+            "id": "formId",
+            "type": "short-input",
+            "value": "10oQhY6H3R78GeXcB66KN678gUm1jcTsfevE5x_YoxtM"
+          },
+          "pageSize": {
+            "id": "pageSize",
+            "type": "short-input",
+            "value": null
+          },
+          "triggerId": {
+            "id": "triggerId",
+            "type": "unknown",
+            "value": "google_forms_webhook"
+          },
+          "webhookId": {
+            "id": "webhookId",
+            "type": "unknown",
+            "value": "6QNbe3VvZaHzs52nc7v_p"
+          },
+          "credential": {
+            "id": "credential",
+            "type": "oauth-input",
+            "value": ""
+          },
+          "responseId": {
+            "id": "responseId",
+            "type": "short-input",
+            "value": null
+          },
+          "setupScript": {
+            "id": "setupScript",
+            "type": "code",
+            "value": "function onFormSubmit(e) {\n  const WEBHOOK_URL = \"\";\n  const SHARED_SECRET = \"\";\n  \n  try {\n    const form = FormApp.getActiveForm();\n    const formResponse = e.response;\n    const itemResponses = formResponse.getItemResponses();\n    \n    // Build answers object\n    const answers = {};\n    for (var i = 0; i < itemResponses.length; i++) {\n      const itemResponse = itemResponses[i];\n      const question = itemResponse.getItem().getTitle();\n      const answer = itemResponse.getResponse();\n      answers[question] = answer;\n    }\n    \n    // Build payload\n    const payload = {\n      provider: \"google_forms\",\n      formId: form.getId(),\n      responseId: formResponse.getId(),\n      createTime: formResponse.getTimestamp().toISOString(),\n      lastSubmittedTime: formResponse.getTimestamp().toISOString(),\n      answers: answers\n    };\n    \n    // Send to webhook\n    const options = {\n      method: \"post\",\n      contentType: \"application/json\",\n      headers: {\n        \"Authorization\": \"Bearer \" + SHARED_SECRET\n      },\n      payload: JSON.stringify(payload),\n      muteHttpExceptions: true\n    };\n    \n    const response = UrlFetchApp.fetch(WEBHOOK_URL, options);\n    \n    if (response.getResponseCode() !== 200) {\n      Logger.log(\"Webhook failed: \" + response.getContentText());\n    } else {\n      Logger.log(\"Successfully sent form response to webhook\");\n    }\n  } catch (error) {\n    Logger.log(\"Error in onFormSubmit: \" + error.toString());\n  }\n}"
+          },
+          "triggerPath": {
+            "id": "triggerPath",
+            "type": "unknown",
+            "value": "990d2ef4-b564-4627-88ed-57603bf271fd"
+          },
+          "triggerSave": {
+            "id": "triggerSave",
+            "type": "trigger-save",
+            "value": null
+          },
+          "samplePayload": {
+            "id": "samplePayload",
+            "type": "code",
+            "value": "{\n  \"responseId\": \"mock_responseId\",\n  \"createTime\": \"mock_createTime\",\n  \"lastSubmittedTime\": \"mock_lastSubmittedTime\",\n  \"formId\": \"mock_formId\",\n  \"answers\": {\n    \"id\": \"sample_id\",\n    \"name\": \"Sample Object\",\n    \"status\": \"active\"\n  },\n  \"raw\": {\n    \"id\": \"sample_id\",\n    \"name\": \"Sample Object\",\n    \"status\": \"active\"\n  }\n}"
+          },
+          "triggerConfig": {
+            "id": "triggerConfig",
+            "type": "unknown",
+            "value": {
+              "token": "google-fitness-form",
+              "formId": "10oQhY6H3R78GeXcB66KN678gUm1jcTsfevE5x_YoxtM",
+              "includeRawPayload": true
+            }
+          },
+          "secretHeaderName": {
+            "id": "secretHeaderName",
+            "type": "short-input",
+            "value": null
+          },
+          "includeRawPayload": {
+            "id": "includeRawPayload",
+            "type": "switch",
+            "value": true
+          },
+          "webhookUrlDisplay": {
+            "id": "webhookUrlDisplay",
+            "type": "short-input",
+            "value": null
+          },
+          "triggerInstructions": {
+            "id": "triggerInstructions",
+            "type": "text",
+            "value": "<div class=\"mb-3\"><strong>1.</strong> Open your Google Form → More (⋮) → Script editor.</div><div class=\"mb-3\"><strong>2.</strong> Paste the Apps Script snippet from below into <code>Code.gs</code> → Save.</div><div class=\"mb-3\"><strong>3.</strong> Triggers (clock icon) → Add Trigger → Function: <code>onFormSubmit</code> → Event source: <code>From form</code> → Event type: <code>On form submit</code> → Save.</div><div class=\"mb-3\"><strong>4.</strong> Authorize when prompted. Submit a test response and verify the run in Sim → Logs.</div>"
+          }
+        },
+        "outputs": {
+          "raw": {
+            "type": "object",
+            "description": "Original payload (when enabled)"
+          },
+          "formId": {
+            "type": "string",
+            "description": "Google Form ID"
+          },
+          "answers": {
+            "type": "object",
+            "description": "Normalized map of question -> answer"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "Response creation timestamp"
+          },
+          "responseId": {
+            "type": "string",
+            "description": "Unique response identifier (if available)"
+          },
+          "lastSubmittedTime": {
+            "type": "string",
+            "description": "Last submitted timestamp"
+          }
+        },
+        "data": {},
+        "layout": {
+          "measuredWidth": 250,
+          "measuredHeight": 230
+        }
+      },
+      "b69d497e-fe14-4116-ae5d-8049dd6c7926": {
+        "id": "b69d497e-fe14-4116-ae5d-8049dd6c7926",
+        "type": "gmail",
+        "name": "Send Email",
+        "position": {
+          "x": -1035.0890438815286,
+          "y": -1554.9406153090742
+        },
+        "enabled": true,
+        "horizontalHandles": true,
+        "advancedMode": true,
+        "triggerMode": false,
+        "height": 404,
+        "subBlocks": {
+          "cc": {
+            "id": "cc",
+            "type": "short-input",
+            "value": "zeeshan_altaf@yahoo.com"
+          },
+          "to": {
+            "id": "to",
+            "type": "short-input",
+            "value": "zeeshan.altaf@gmail.com"
+          },
+          "bcc": {
+            "id": "bcc",
+            "type": "short-input",
+            "value": null
+          },
+          "body": {
+            "id": "body",
+            "type": "long-input",
+            "value": "Hello from Fit Fusion Team,\n<br>\n<br>\nHere is your personalized Fitness and Nutrition Plan.\n\n<fitnessagent.content>\n\nBest,<br>\nYour Fitness Partner"
+          },
+          "query": {
+            "id": "query",
+            "type": "short-input",
+            "value": null
+          },
+          "folder": {
+            "id": "folder",
+            "type": "folder-selector",
+            "value": ""
+          },
+          "subject": {
+            "id": "subject",
+            "type": "short-input",
+            "value": "Your Personalized Fitness & Nutrition Plan"
+          },
+          "labelIds": {
+            "id": "labelIds",
+            "type": "dropdown",
+            "value": null
+          },
+          "threadId": {
+            "id": "threadId",
+            "type": "short-input",
+            "value": null
+          },
+          "messageId": {
+            "id": "messageId",
+            "type": "short-input",
+            "value": null
+          },
+          "operation": {
+            "id": "operation",
+            "type": "dropdown",
+            "value": "send_gmail"
+          },
+          "credential": {
+            "id": "credential",
+            "type": "oauth-input",
+            "value": ""
+          },
+          "markAsRead": {
+            "id": "markAsRead",
+            "type": "switch",
+            "value": false
+          },
+          "maxResults": {
+            "id": "maxResults",
+            "type": "short-input",
+            "value": null
+          },
+          "unreadOnly": {
+            "id": "unreadOnly",
+            "type": "switch",
+            "value": null
+          },
+          "attachments": {
+            "id": "attachments",
+            "type": "short-input",
+            "value": null
+          },
+          "contentType": {
+            "id": "contentType",
+            "type": "dropdown",
+            "value": "html"
+          },
+          "searchQuery": {
+            "id": "searchQuery",
+            "type": "short-input",
+            "value": null
+          },
+          "sourceLabel": {
+            "id": "sourceLabel",
+            "type": "folder-selector",
+            "value": ""
+          },
+          "triggerSave": {
+            "id": "triggerSave",
+            "type": "trigger-save",
+            "value": null
+          },
+          "manualFolder": {
+            "id": "manualFolder",
+            "type": "short-input",
+            "value": null
+          },
+          "moveMessageId": {
+            "id": "moveMessageId",
+            "type": "short-input",
+            "value": null
+          },
+          "samplePayload": {
+            "id": "samplePayload",
+            "type": "code",
+            "value": "{\n  \"email\": {\n    \"id\": \"mock_id\",\n    \"threadId\": \"mock_threadId\",\n    \"subject\": \"mock_subject\",\n    \"from\": \"mock_from\",\n    \"to\": \"mock_to\",\n    \"cc\": \"mock_cc\",\n    \"date\": \"mock_date\",\n    \"bodyText\": \"mock_bodyText\",\n    \"bodyHtml\": \"mock_bodyHtml\",\n    \"labels\": \"mock_labels\",\n    \"hasAttachments\": true,\n    \"attachments\": null\n  },\n  \"timestamp\": \"mock_timestamp\"\n}"
+          },
+          "actionMessageId": {
+            "id": "actionMessageId",
+            "type": "short-input",
+            "value": null
+          },
+          "attachmentFiles": {
+            "id": "attachmentFiles",
+            "type": "file-upload",
+            "value": ""
+          },
+          "labelManagement": {
+            "id": "labelManagement",
+            "type": "folder-selector",
+            "value": ""
+          },
+          "destinationLabel": {
+            "id": "destinationLabel",
+            "type": "folder-selector",
+            "value": ""
+          },
+          "replyToMessageId": {
+            "id": "replyToMessageId",
+            "type": "short-input",
+            "value": null
+          },
+          "manualSourceLabel": {
+            "id": "manualSourceLabel",
+            "type": "short-input",
+            "value": null
+          },
+          "includeAttachments": {
+            "id": "includeAttachments",
+            "type": "switch",
+            "value": false
+          },
+          "triggerCredentials": {
+            "id": "triggerCredentials",
+            "type": "oauth-input",
+            "value": ""
+          },
+          "labelFilterBehavior": {
+            "id": "labelFilterBehavior",
+            "type": "dropdown",
+            "value": "INCLUDE"
+          },
+          "triggerInstructions": {
+            "id": "triggerInstructions",
+            "type": "text",
+            "value": "<div class=\"mb-3\"><strong>1.</strong> Connect your Gmail account using OAuth credentials</div><div class=\"mb-3\"><strong>2.</strong> Configure which Gmail labels to monitor (optional)</div><div class=\"mb-3\"><strong>3.</strong> The system will automatically check for new emails and trigger your workflow</div>"
+          },
+          "labelActionMessageId": {
+            "id": "labelActionMessageId",
+            "type": "short-input",
+            "value": null
+          },
+          "manualLabelManagement": {
+            "id": "manualLabelManagement",
+            "type": "short-input",
+            "value": null
+          },
+          "manualDestinationLabel": {
+            "id": "manualDestinationLabel",
+            "type": "short-input",
+            "value": null
+          }
+        },
+        "outputs": {
+          "cc": {
+            "type": "string",
+            "description": "CC recipients (comma-separated)"
+          },
+          "to": {
+            "type": "string",
+            "description": "Recipient email address"
+          },
+          "date": {
+            "type": "string",
+            "description": "Email date in ISO format"
+          },
+          "from": {
+            "type": "string",
+            "description": "Sender email address"
+          },
+          "labels": {
+            "type": "string",
+            "description": "Email labels (comma-separated)"
+          },
+          "content": {
+            "type": "string",
+            "description": "Response content"
+          },
+          "subject": {
+            "type": "string",
+            "description": "Email subject line"
+          },
+          "email_id": {
+            "type": "string",
+            "description": "Gmail message ID"
+          },
+          "metadata": {
+            "type": "json",
+            "description": "Email metadata"
+          },
+          "body_html": {
+            "type": "string",
+            "description": "HTML email body"
+          },
+          "body_text": {
+            "type": "string",
+            "description": "Plain text email body"
+          },
+          "raw_email": {
+            "type": "json",
+            "description": "Complete raw email data from Gmail API (if enabled)"
+          },
+          "thread_id": {
+            "type": "string",
+            "description": "Gmail thread ID"
+          },
+          "timestamp": {
+            "type": "string",
+            "description": "Event timestamp"
+          },
+          "attachments": {
+            "type": "json",
+            "description": "Email attachments array"
+          },
+          "has_attachments": {
+            "type": "boolean",
+            "description": "Whether email has attachments"
+          }
+        },
+        "data": {},
+        "layout": {
+          "measuredWidth": 250,
+          "measuredHeight": 404
+        }
+      },
+      "0bdfc9f2-8d64-4df6-a4b6-1749af588688": {
+        "id": "0bdfc9f2-8d64-4df6-a4b6-1749af588688",
+        "type": "note",
+        "name": "FitFusion",
+        "position": {
+          "x": -1928.817946162148,
+          "y": -1680.1897194229477
+        },
+        "enabled": true,
+        "horizontalHandles": true,
+        "advancedMode": false,
+        "triggerMode": false,
+        "height": 114,
+        "subBlocks": {
+          "format": {
+            "id": "format",
+            "type": "dropdown",
+            "value": "markdown"
+          },
+          "content": {
+            "id": "content",
+            "type": "long-input",
+            "value": "*Your Personalized Plan, Delivered Instantly.*\n\nAn advanced AI agent that uses personalized biometrics and goals (Age, Weight, Gender, Goal, and Medical History) to generate a complete, risk-aware fitness and nutrition program, outputted instantly in email-ready HTML.\n\n**Form URL:**\nhttps://forms.gle/3gu5V3jeD1whLEe18"
+          }
+        },
+        "outputs": {},
+        "data": {},
+        "layout": {
+          "measuredWidth": 250,
+          "measuredHeight": 114
+        }
+      },
+      "89c5baa0-a5de-4587-a29b-5e8f4da93055": {
+        "id": "89c5baa0-a5de-4587-a29b-5e8f4da93055",
+        "type": "agent",
+        "name": "Fitness Agent",
+        "position": {
+          "x": -1349.4165077290727,
+          "y": -1555.3243947472383
+        },
+        "enabled": true,
+        "horizontalHandles": true,
+        "advancedMode": false,
+        "triggerMode": false,
+        "height": 288,
+        "subBlocks": {
+          "model": {
+            "id": "model",
+            "type": "combobox",
+            "value": "gpt-5-mini"
+          },
+          "tools": {
+            "id": "tools",
+            "type": "tool-input",
+            "value": []
+          },
+          "apiKey": {
+            "id": "apiKey",
+            "type": "short-input",
+            "value": ""
+          },
+          "messages": {
+            "id": "messages",
+            "type": "messages-input",
+            "value": [
+              {
+                "role": "system",
+                "content": "You are a certified fitness trainer and nutritionist. Based on the user’s Age, Weight, Gender, Fitness Goal (Muscle Gain, Fat Loss, Endurance, or Flexibility), and Medical Condition (if any), create a personalized fitness plan in HTML format suitable for email.\n\nRequirements:\n\nDaily Nutrition Targets – Calculate total calories and a macronutrient breakdown (protein, carbs, fats in grams), adjusted for the user’s stated fitness goal.\n\nWeekly Workout Routine – Provide a detailed 7-day schedule with day-by-day exercises, sets, reps, and focus areas.\n\nCritical Rules:\n\nTailor all recommendations to the user’s goal.\n\nModify or exclude exercises that could pose a risk based on any stated medical condition.\n\nInclude a clear disclaimer advising consultation with a doctor before starting the program.\n\nOutput Instructions:\n\nStructure the entire response using clean, email-friendly HTML (e.g., use headings, lists, and bold text for clarity).\n\nDo not include any follow-up questions, offers for further tailoring, or conversational text at the end.\n\nPresent the information in two clear, labeled sections: \"Daily Nutrition Targets\" and \"Weekly Workout Routine\"."
+              },
+              {
+                "role": "user",
+                "content": "User Profile:\n<fitnessprofile.answers>"
+              }
+            ]
+          },
+          "verbosity": {
+            "id": "verbosity",
+            "type": "dropdown",
+            "value": "medium"
+          },
+          "memoryType": {
+            "id": "memoryType",
+            "type": "dropdown",
+            "value": "none"
+          },
+          "temperature": {
+            "id": "temperature",
+            "type": "slider",
+            "value": 0.3
+          },
+          "azureEndpoint": {
+            "id": "azureEndpoint",
+            "type": "short-input",
+            "value": ""
+          },
+          "conversationId": {
+            "id": "conversationId",
+            "type": "short-input",
+            "value": null
+          },
+          "responseFormat": {
+            "id": "responseFormat",
+            "type": "code",
+            "value": null
+          },
+          "azureApiVersion": {
+            "id": "azureApiVersion",
+            "type": "short-input",
+            "value": null
+          },
+          "reasoningEffort": {
+            "id": "reasoningEffort",
+            "type": "dropdown",
+            "value": "medium"
+          },
+          "slidingWindowSize": {
+            "id": "slidingWindowSize",
+            "type": "short-input",
+            "value": null
+          },
+          "slidingWindowTokens": {
+            "id": "slidingWindowTokens",
+            "type": "short-input",
+            "value": null
+          }
+        },
+        "outputs": {
+          "model": {
+            "type": "string",
+            "description": "Model used for generation"
+          },
+          "tokens": {
+            "type": "any",
+            "description": "Token usage statistics"
+          },
+          "content": {
+            "type": "string",
+            "description": "Generated response content"
+          },
+          "toolCalls": {
+            "type": "any",
+            "description": "Tool calls made"
+          }
+        },
+        "data": {},
+        "layout": {
+          "measuredWidth": 250,
+          "measuredHeight": 288
+        }
+      }
+    },
+    "edges": [
+      {
+        "id": "14d20f02-0b8e-4859-8554-2e2ccd313aa4",
+        "source": "89c5baa0-a5de-4587-a29b-5e8f4da93055",
+        "target": "b69d497e-fe14-4116-ae5d-8049dd6c7926",
+        "sourceHandle": "source",
+        "targetHandle": "target",
+        "type": "default",
+        "data": {}
+      },
+      {
+        "id": "12b79af9-2afc-47bc-8c50-95c15f2f8b32",
+        "source": "a069848f-b1ab-40e2-bf3e-5c3456672586",
+        "target": "89c5baa0-a5de-4587-a29b-5e8f4da93055",
+        "sourceHandle": "source",
+        "targetHandle": "target",
+        "type": "default",
+        "data": {}
+      }
+    ],
+    "loops": {},
+    "parallels": {},
+    "metadata": {
+      "name": "Fit Fusion",
+      "description": "New workflow",
+      "exportedAt": "2025-12-04T11:38:41.233Z"
+    },
+    "variables": []
+  }
+}
