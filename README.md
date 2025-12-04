@@ -22,4 +22,4 @@ Your smart recipe generator that decodes any dish name into foolproof cooking in
 *Your Personalized Plan, Delivered Instantly.*
 
 An advanced AI agent that uses personalized biometrics and goals (Age, Weight, Gender, Goal, and Medical History) to generate a complete, risk-aware fitness and nutrition program, outputted instantly in email-ready HTML.
-![Fit Fusion/Fit-Fusion.jpg]()
+![Fit Fusion](https://github.com/mzeeshanaltaf/sim-workflows/blob/main/Fit%20Fusion/Fit-Fusion.jpg)
